@@ -12,13 +12,10 @@ permissions:
 jobs:
   lint:
     name: Lint
-    uses: ./.github/workflows/common/lint.yml
+    uses: ./.github/workflows/lint.yml
   test:
     name: Test
-    uses: ./.github/workflows/common/test.yml
+    uses: ./.github/workflows/test.yml
   build:
     name: Build
-    uses: ./.github/workflows/common/build.yml
-  publish:
-    name: Publish
-    uses: ./.github/workflows/common/publish.yml
+    uses: ./.github/workflows/build.yml
