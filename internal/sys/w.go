@@ -12,12 +12,12 @@ import (
 )
 
 type ProcessInfo struct {
-	PID      int     `json:"pid"`
-	User     string  `json:"user"`
-	Command  string  `json:"command"`
-	CPU      float64 `json:"cpu"`
-	MemPct   float64 `json:"mem_pct"`
-	RSSKB    int64   `json:"rss_kb"`
+	PID     int     `json:"pid"`
+	User    string  `json:"user"`
+	Command string  `json:"command"`
+	CPU     float64 `json:"cpu"`
+	MemPct  float64 `json:"mem_pct"`
+	RSSKB   int64   `json:"rss_kb"`
 }
 
 type WSnapshot struct {

@@ -40,12 +40,15 @@ func Run(opts Options) error {
 	if err != nil {
 		return err
 	}
-	defer term.Restore(fd, oldState)
+	defer func() {
+		if restoreErr := term.Restore(fd, oldState); restoreErr != nil {
+			_, _ = fmt.Fprintf(os.Stderr, "failed to restore terminal state: %v\n", restoreErr)
+		}
+	}()
 
 	fmt.Fprint(os.Stdout, "\033[?25l\033[2J\033[H")
 	defer fmt.Fprint(os.Stdout, "\033[0m\033[?25h\033[2J\033[H")
 
-	rand.Seed(time.Now().UnixNano())
 	w, h, err := term.GetSize(int(os.Stdout.Fd()))
 	if err != nil {
 		return err
@@ -93,7 +96,7 @@ func Run(opts Options) error {
 func newDrop(height int) drop {
 	return drop{
 		y:      -rand.Intn(height),
-		length: 4 + rand.Intn(max(5, height/3)),
+		length: 4 + rand.Intn(maxInt(5, height/3)),
 		speed:  1 + rand.Intn(3),
 	}
 }
@@ -183,7 +186,7 @@ func readKeys(quitCh chan<- struct{}) {
 	}
 }
 
-func max(a, b int) int {
+func maxInt(a, b int) int {
 	if a > b {
 		return a
 	}

@@ -142,11 +142,11 @@ func renderMarkdown(content string, styleName string) string {
 	lines := strings.Split(content, "\n")
 	inFence := false
 	fenceRe := regexp.MustCompile("^\\s*```")
-	headerRe := regexp.MustCompile("^\\s{0,3}#{1,6}\\s+")
-	listRe := regexp.MustCompile("^\\s*([-*+]\\s+|\\d+\\.\\s+)")
-	quoteRe := regexp.MustCompile("^\\s*>+\\s?")
+	headerRe := regexp.MustCompile(`^\s{0,3}#{1,6}\s+`)
+	listRe := regexp.MustCompile(`^\s*([-*+]\s+|\d+\.\s+)`)
+	quoteRe := regexp.MustCompile(`^\s*>+\s?`)
 	inlineCodeRe := regexp.MustCompile("`[^`]+`")
-	linkRe := regexp.MustCompile(`\\[[^\\]]+\\]\\([^\\)]+\\)`)
+	linkRe := regexp.MustCompile(`\[[^\]]+\]\([^)]+\)`)
 
 	for i, line := range lines {
 		rendered := line

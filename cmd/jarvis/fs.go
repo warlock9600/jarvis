@@ -10,8 +10,8 @@ import (
 	"jarvis/internal/common"
 	"jarvis/internal/fsutil"
 
-	"github.com/spf13/cobra"
 	"github.com/jedib0t/go-pretty/v6/text"
+	"github.com/spf13/cobra"
 )
 
 func newFSCmd(state *app.State) *cobra.Command {

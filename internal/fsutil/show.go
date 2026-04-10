@@ -11,15 +11,15 @@ import (
 )
 
 type Entry struct {
-	Name      string    `json:"name"`
-	Path      string    `json:"path"`
-	Type      string    `json:"type"`
-	SizeBytes int64     `json:"size_bytes"`
-	Executable bool     `json:"executable"`
-	Mode      string    `json:"mode"`
-	Modified  time.Time `json:"modified"`
-	GitStatus string    `json:"git_status,omitempty"`
-	Depth     int       `json:"depth,omitempty"`
+	Name       string    `json:"name"`
+	Path       string    `json:"path"`
+	Type       string    `json:"type"`
+	SizeBytes  int64     `json:"size_bytes"`
+	Executable bool      `json:"executable"`
+	Mode       string    `json:"mode"`
+	Modified   time.Time `json:"modified"`
+	GitStatus  string    `json:"git_status,omitempty"`
+	Depth      int       `json:"depth,omitempty"`
 }
 
 type Options struct {
@@ -132,14 +132,14 @@ func toEntry(fullPath, name string, info os.FileInfo, depth int) Entry {
 		typeName = "dir"
 	}
 	return Entry{
-		Name:      name,
-		Path:      fullPath,
-		Type:      typeName,
-		SizeBytes: info.Size(),
+		Name:       name,
+		Path:       fullPath,
+		Type:       typeName,
+		SizeBytes:  info.Size(),
 		Executable: info.Mode().Perm()&0o111 != 0 && !info.IsDir(),
-		Mode:      info.Mode().String(),
-		Modified:  info.ModTime(),
-		Depth:     depth,
+		Mode:       info.Mode().String(),
+		Modified:   info.ModTime(),
+		Depth:      depth,
 	}
 }
 

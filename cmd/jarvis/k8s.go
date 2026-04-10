@@ -102,60 +102,6 @@ Return codes:
 	return cmd
 }
 
-func newK8sClustersCmd(state *app.State) *cobra.Command {
-	cmd := &cobra.Command{
-		Use:   "clusters",
-		Short: "List clusters from kubeconfig",
-		Long: `List Kubernetes clusters from kubeconfig.
-
-Return codes:
-- 0: clusters listed
-- 1: kubectl failed`,
-		RunE: func(_ *cobra.Command, _ []string) error {
-			clusters, err := k8sutil.Clusters(state.Config.K8s.Kubeconfig)
-			if err != nil {
-				return common.NewExitError(common.ExitError, "cannot list clusters", err)
-			}
-			if state.JSON {
-				return state.Printer.PrintJSON(map[string]any{"clusters": clusters})
-			}
-			for _, c := range clusters {
-				fmt.Fprintln(os.Stdout, c)
-			}
-			return nil
-		},
-		Example: "jarvis k8s clusters\njarvis k8s clusters --json",
-	}
-	return cmd
-}
-
-func newK8sNamespacesCmd(state *app.State) *cobra.Command {
-	cmd := &cobra.Command{
-		Use:   "namespaces",
-		Short: "List namespaces in current cluster",
-		Long: `List namespaces available in the currently selected cluster context.
-
-Return codes:
-- 0: namespaces listed
-- 1: kubectl failed`,
-		RunE: func(_ *cobra.Command, _ []string) error {
-			nss, err := k8sutil.Namespaces(state.Config.K8s.Kubeconfig)
-			if err != nil {
-				return common.NewExitError(common.ExitError, "cannot list namespaces", err)
-			}
-			if state.JSON {
-				return state.Printer.PrintJSON(map[string]any{"namespaces": nss})
-			}
-			for _, ns := range nss {
-				fmt.Fprintln(os.Stdout, ns)
-			}
-			return nil
-		},
-		Example: "jarvis k8s namespaces\njarvis k8s namespaces --json",
-	}
-	return cmd
-}
-
 func newK8sContextCmd(state *app.State) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:     "context",
