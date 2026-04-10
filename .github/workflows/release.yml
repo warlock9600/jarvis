@@ -11,9 +11,12 @@ permissions:
   contents: write
 
 jobs:
-  lint_test:
+  lint:
     name: Lint and Test
-    uses: ./.github/workflows/lint-test.yml
+    uses: ./.github/workflows/_lint.yml
+  test:
+    name: Lint and Test
+    uses: ./.github/workflows/_test.yml
 
   build:
     name: Build (${{ matrix.goos }}/${{ matrix.goarch }})
