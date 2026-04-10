@@ -10,9 +10,6 @@ on:
 permissions:
   contents: write
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
-
 jobs:
   build:
     name: Build (${{ matrix.goos }}/${{ matrix.goarch }})
@@ -32,10 +29,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v6
         with:
           go-version-file: go.mod
           cache: true
@@ -64,7 +61,7 @@ jobs:
           tar -C "${OUT_DIR}" -czf "dist/${ARCHIVE_NAME}" "${BIN_NAME}"
 
       - name: Upload archive
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: release-${{ matrix.goos }}-${{ matrix.goarch }}
           path: dist/*.tar.gz
@@ -76,7 +73,7 @@ jobs:
 
     steps:
       - name: Download archives
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           pattern: release-*
           merge-multiple: true
