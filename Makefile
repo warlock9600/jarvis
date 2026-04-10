@@ -33,4 +33,4 @@ test-docker:
 	docker run --rm -v $(PWD):/src -w /src golang:1.25 sh -lc 'export PATH=/usr/local/go/bin:$$PATH && go test ./...'
 
 lint-docker:
-	docker run --rm -v $(PWD):/src -w /src golang:1.25 sh -lc 'export PATH=/usr/local/go/bin:$$PATH && go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.64.8 && $$(go env GOPATH)/bin/golangci-lint run ./...'
+	docker run --rm -v $(PWD):/src -w /src golang:1.25 sh -lc 'export PATH=/usr/local/go/bin:$$PATH && go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.11.4 && $$(go env GOPATH)/bin/golangci-lint run ./...'
